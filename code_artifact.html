@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>翠葉茗軒 Green Leaf Tea House - 台灣手搖茶飲專賣</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tea: {
+                            50: '#f4f7f4',
+                            100: '#e3ebe2',
+                            600: '#4a6b51',
+                            700: '#3b5440',
+                            800: '#2d3f31',
+                            900: '#1e2920',
+                        },
+                        sand: {
+                            50: '#faf8f5',
+                            100: '#f3ede4',
+                            200: '#e6dac9',
+                            600: '#b89c72',
+                            700: '#9c7f54',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans TC', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        /* 隱藏滾動條但保持功能 */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-sand-50 text-gray-800 font-sans min-h-screen flex flex-col selection:bg-tea-600 selection:text-white">
+
+    <!-- 導覽列 -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-sand-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-tea-600 rounded-full flex items-center justify-center text-white shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.467 5.99 5.99 0 0 0-1.925 3.546 5.974 5.974 0 0 1-2.133-1A3.75 3.75 0 0 0 12 18Z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold tracking-wider text-tea-800 block">翠葉茗軒</span>
+                        <span class="text-[10px] uppercase tracking-widest text-sand-600 block -mt-1 font-playfair">Green Leaf Tea</span>
+                    </div>
+                </div>
+
+                <!-- 桌機導覽選單 -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#features" class="text-gray-600 hover:text-tea-600 font-medium transition-colors">品牌特色</a>
+                    <a href="#products" class="text-gray-600 hover:text-tea-600 font-medium transition-colors">人氣推薦</a>
+                    <a href="#menu-section" class="text-gray-600 hover:text-tea-600 font-medium transition-colors">線上菜單</a>
+                    <a href="#about" class="text-gray-600 hover:text-tea-600 font-medium transition-colors">關於我們</a>
+                </nav>
+
+                <!-- 右側按鈕：購物車、行動選單 -->
+                <div class="flex items-center space-x-4">
+                    <!-- 購物車按鈕 -->
+                    <button onclick="toggleCart(true)" class="relative p-2.5 bg-tea-50 text-tea-700 hover:bg-tea-100 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-tea-600" aria-label="查看購物車">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                        </svg>
+                        <span id="cart-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white scale-0 transition-transform duration-300">0</span>
+                    </button>
+
+                    <!-- 行動版選單開關 -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-600 hover:text-tea-600 rounded-lg focus:outline-none" aria-label="切換選單">
+                        <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                        <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 行動版導覽選單 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-sand-100 transition-all duration-300">
+            <div class="px-2 pt-2 pb-4 space-y-1 sm:px-3 shadow-inner">
+                <a href="#features" onclick="toggleMobileMenu()" class="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-tea-50 hover:text-tea-700 rounded-lg">品牌特色</a>
+                <a href="#products" onclick="toggleMobileMenu()" class="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-tea-50 hover:text-tea-700 rounded-lg">人氣推薦</a>
+                <a href="#menu-section" onclick="toggleMobileMenu()" class="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-tea-50 hover:text-tea-700 rounded-lg">線上菜單</a>
+                <a href="#about" onclick="toggleMobileMenu()" class="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-tea-50 hover:text-tea-700 rounded-lg">關於我們</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero 主視覺區 -->
+    <section class="relative bg-tea-900 text-white py-24 md:py-32 overflow-hidden flex items-center">
+        <!-- 裝飾背景圖案 -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <defs>
+                    <pattern id="tea-leaf-pattern" width="60" height="60" patternUnits="userSpaceOnUse">
+                        <path d="M30,5 C20,15 10,20 10,35 C10,45 20,50 30,50 C40,50 50,45 50,35 C50,20 40,15 30,5 Z" fill="none" stroke="currentColor" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#tea-leaf-pattern)" />
+            </svg>
+        </div>
+        
+        <!-- 背景漸層遮罩 -->
+        <div class="absolute inset-0 bg-gradient-to-r from-tea-950 via-tea-900/90 to-transparent"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-tea-700/60 border border-tea-500/30 rounded-full text-xs font-semibold uppercase tracking-widest text-sand-200">
+                        <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-ping"></span>
+                        瑜的手作茶飲提案
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
+                        把健康與清新，<br class="hidden sm:block"/>
+                        <span class="text-sand-200 font-serif italic">手作</span>成每一杯日常。
+                    </h1>
+                    <p class="text-base sm:text-lg text-teal-100/80 max-w-xl mx-auto lg:mx-0">
+                        我是瑜，熱愛手搖飲，也熱愛把研發出的特色風味分享給大家。從天然選材、清爽配方到每日純手工製作，只想讓 20 到 60 歲的每一位你，都能安心找到喜歡的一杯。
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#menu-section" class="w-full sm:w-auto px-8 py-4 bg-sand-600 hover:bg-sand-700 text-white font-semibold rounded-xl text-center shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200">
+                            立即線上點餐
+                        </a>
+                        <a href="#features" class="w-full sm:w-auto px-8 py-4 bg-transparent hover:bg-white/10 border border-white/30 text-white font-semibold rounded-xl text-center transition-all duration-200">
+                            探索品牌特色
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 亮點飲料大圖 -->
+                <div class="lg:col-span-5 relative flex justify-center">
+                    <div class="relative w-72 h-96 sm:w-80 sm:h-[420px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/15 rotate-2 hover:rotate-0 transition-transform duration-500 bg-tea-800">
+                        <!-- 茶飲示意圖 (使用精緻的 SVG 與漸層模擬茶杯，確保在沒有外部網路圖片時也能完美呈現) -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-amber-900/60 to-transparent z-10"></div>
+                        <div class="absolute inset-0 flex flex-col justify-between p-6 z-20">
+                            <span class="self-start px-2 py-1 bg-white/25 backdrop-blur-md rounded text-[10px] tracking-widest font-bold">SIGNATURE</span>
+                            <div class="text-white">
+                                <h3 class="text-xl font-bold">翠玉芝芝奶蓋</h3>
+                                <p class="text-xs text-sand-100 mt-1">選自阿里山高山金萱茶底</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 藝術感茶杯繪圖 (模擬大自然手搖飲氛圍) -->
+                        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-emerald-800 to-amber-700">
+                            <svg class="w-48 h-48 opacity-40 text-sand-200" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M30 20 L35 80 Q35 85 40 85 L60 85 Q65 85 65 80 L70 20 Z" />
+                                <path d="M30 30 Q50 35 70 30" />
+                                <path d="M33 50 Q50 55 67 50" />
+                                <circle cx="45" cy="65" r="3" fill="currentColor"/>
+                                <circle cx="55" cy="70" r="3.5" fill="currentColor"/>
+                                <circle cx="40" cy="73" r="2.5" fill="currentColor"/>
+                                <circle cx="60" cy="62" r="3" fill="currentColor"/>
+                                <path d="M31 10 Q50 25 69 10" stroke-dasharray="3,3" />
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- 裝飾徽章 -->
+                    <div class="absolute -bottom-6 -left-6 bg-sand-200 text-tea-900 w-24 h-24 rounded-full p-2 flex flex-col items-center justify-center text-center shadow-lg border-2 border-white animate-bounce-slow">
+                        <span class="font-playfair font-bold text-lg leading-tight">FREE</span>
+                        <span class="text-[9px] font-bold tracking-wider leading-none">自備環保杯<br/>折 5 元</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 品牌特色 (Features) -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <span class="text-sm font-bold uppercase tracking-widest text-sand-600">Our Pillars</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">為什麼選擇「翠葉茗軒」？</h2>
+                <div class="h-1 w-12 bg-tea-600 mx-auto"></div>
+                <p class="text-gray-500 text-sm sm:text-base">
+                    健康、清新、天然、純手工，是瑜研發每一款飲品時不妥協的四項原則，讓好喝與安心不必二選一。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+                <!-- 特色 1 -->
+                <div class="bg-sand-50 p-8 rounded-2xl border border-sand-100 hover:border-tea-600/30 hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-12 h-12 bg-tea-50 text-tea-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-tea-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                        <!-- 茶葉圖示 -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18l-4 4m4-4l4 4M8 12a4 4 0 0 0-4 4m16-4a4 4 0 0 1-4 4" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">手採台灣原葉</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        拒絕劣質茶碎與人工香料。堅持嚴選來自南投、阿里山高海拔契作茶園的優質原葉茶，保留最真摯的茶湯本味。
+                    </p>
+                </div>
+
+                <!-- 特色 2 -->
+                <div class="bg-sand-50 p-8 rounded-2xl border border-sand-100 hover:border-tea-600/30 hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-12 h-12 bg-tea-50 text-tea-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-tea-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                        <!-- 牛奶圖示 -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v11.811a4.5 4.5 0 1 1-1.5 0V3.104a1.125 1.125 0 0 1 1.5 0Zm6 12h.008v.008h-.008v-.008Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">在地酪農鮮乳</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        堅持與台灣小農牧場合作，每日新鮮配送優質鮮乳。絕不添加化學奶精，口感綿密順滑，健康無負擔。
+                    </p>
+                </div>
+
+                <!-- 特色 3 -->
+                <div class="bg-sand-50 p-8 rounded-2xl border border-sand-100 hover:border-tea-600/30 hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-12 h-12 bg-tea-50 text-tea-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-tea-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                        <!-- 糖/自然圖示 -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.467 5.99 5.99 0 0 0-1.925 3.546 5.974 5.974 0 0 1-2.133-1A3.75 3.75 0 0 0 12 18Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">每日手工熬糖</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        捨棄高果糖糖漿，不計成本採用天然紅蔗糖與二砂，每日新鮮手工翻炒慢火熬煮。甜而不膩，帶著自然焦糖香氣。
+                    </p>
+                </div>
+
+                <!-- 特色 4 -->
+                <div class="bg-sand-50 p-8 rounded-2xl border border-sand-100 hover:border-tea-600/30 hover:shadow-xl transition-all duration-300 group">
+                    <div class="w-12 h-12 bg-tea-50 text-tea-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-tea-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                        <!-- 溫度/冰塊圖示 -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">精密定溫沖沏</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        針對不同茶種制定專屬沖泡溫度與時間：綠茶清香去澀、烏龍醇厚回甘。透過科學定溫，穩定釋放茶葉黃金比例。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 產品介紹：人氣推薦 (Products Showcase) -->
+    <section id="products" class="py-20 bg-sand-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div class="space-y-4">
+                    <span class="text-sm font-bold uppercase tracking-widest text-tea-600">Best Sellers</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-tea-800">本店必喝：人氣排行榜</h2>
+                    <div class="h-1 w-12 bg-tea-600"></div>
+                </div>
+                <p class="text-gray-500 text-sm max-w-md mt-4 md:mt-0">
+                    第一次來不知道點什麼？跟著大家點絕不踩雷！精選最熱銷的 3 款黃金比例手搖飲。
+                </p>
+            </div>
+
+            <!-- 人氣卡片區 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 人氣 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group">
+                    <div class="relative h-64 bg-emerald-900 overflow-hidden flex items-center justify-center text-white">
+                        <!-- 擬真茶飲背景 -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-amber-800 to-emerald-950"></div>
+                        <div class="absolute inset-0 flex items-center justify-center p-4">
+                            <!--  -->
+                            <svg class="w-28 h-28 text-white opacity-40 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M5 5l14 14M5 19L19 5" />
+                            </svg>
+                        </div>
+                        <div class="absolute top-4 left-4 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                            NO.1 熱銷
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 group-hover:text-tea-600 transition-colors">黑糖琥珀珍珠鮮奶</h3>
+                                <span class="text-lg font-bold text-tea-700 font-playfair">$75</span>
+                            </div>
+                            <p class="text-gray-500 text-sm mb-4">
+                                慢火熬煮的琥珀黑糖珍珠，搭配百分之百濃郁小農鮮乳，絕美漸層紋路不僅好拍，醇厚黑糖香與乳香在口中完美交融。
+                            </p>
+                        </div>
+                        <button onclick="openCustomizer('黑糖琥珀珍珠鮮奶', 75)" class="w-full py-2.5 bg-tea-600 hover:bg-tea-700 text-white font-medium rounded-xl transition-all duration-200">
+                            加入購物車
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 人氣 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group">
+                    <div class="relative h-64 bg-amber-950 overflow-hidden flex items-center justify-center text-white">
+                        <!-- 擬真茶飲背景 -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-700 to-amber-900"></div>
+                        <div class="absolute inset-0 flex items-center justify-center p-4">
+                            <!--  -->
+                            <svg class="w-28 h-28 text-white opacity-40 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M8 12h8m-4-4v8" />
+                            </svg>
+                        </div>
+                        <div class="absolute top-4 left-4 bg-tea-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                            經典強推
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 group-hover:text-tea-600 transition-colors">皇家芝芝紅茶拿鐵</h3>
+                                <span class="text-lg font-bold text-tea-700 font-playfair">$80</span>
+                            </div>
+                            <p class="text-gray-500 text-sm mb-4">
+                                優雅斯里蘭卡紅茶底製成的鮮奶茶，上層鋪上滿滿手工研磨、微鹹帶甜的法國鮮奶油芝士奶蓋。品嚐多層次的奢華滋味。
+                            </p>
+                        </div>
+                        <button onclick="openCustomizer('皇家芝芝紅茶拿鐵', 80)" class="w-full py-2.5 bg-tea-600 hover:bg-tea-700 text-white font-medium rounded-xl transition-all duration-200">
+                            加入購物車
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 人氣 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group">
+                    <div class="relative h-64 bg-yellow-900 overflow-hidden flex items-center justify-center text-white">
+                        <!-- 擬真茶飲背景 -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-500 to-emerald-800"></div>
+                        <div class="absolute inset-0 flex items-center justify-center p-4">
+                            <!--  -->
+                            <svg class="w-28 h-28 text-white opacity-40 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <path d="M12 2L2 22h20L12 2z" />
+                            </svg>
+                        </div>
+                        <div class="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                            清爽首選
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-gray-900 group-hover:text-tea-600 transition-colors">霸氣柳橙四季春</h3>
+                                <span class="text-lg font-bold text-tea-700 font-playfair">$70</span>
+                            </div>
+                            <p class="text-gray-500 text-sm mb-4">
+                                新鮮現榨柳橙汁與南投松柏嶺四季春茶激烈碰撞，杯中放滿新鮮柳橙切片與綠茶凍。果香綻放，茶韻悠長。
+                            </p>
+                        </div>
+                        <button onclick="openCustomizer('霸氣柳橙四季春', 70)" class="w-full py-2.5 bg-tea-600 hover:bg-tea-700 text-white font-medium rounded-xl transition-all duration-200">
+                            加入購物車
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 線上點餐與菜單 (Interactive Menu) -->
+    <section id="menu-section" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto space-y-4 mb-16">
+                <span class="text-sm font-bold uppercase tracking-widest text-sand-600">Our Menu</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">線上點餐菜單</h2>
+                <div class="h-1 w-12 bg-tea-600 mx-auto"></div>
+                <p class="text-gray-500 text-sm">
+                    點擊各項茶飲，即可自由客製化甜度、冰量與追加美味配料！
+                </p>
+            </div>
+
+            <!-- 分類頁籤 (Category Tabs) -->
+            <div class="flex overflow-x-auto no-scrollbar justify-start md:justify-center border-b border-sand-100 gap-2 pb-px mb-12">
+                <button onclick="filterMenu('all')" id="tab-all" class="menu-tab px-6 py-3.5 border-b-2 border-tea-600 text-tea-700 font-semibold text-sm whitespace-nowrap transition-all duration-200">
+                    全部飲品
+                </button>
+                <button onclick="filterMenu('tea')" id="tab-tea" class="menu-tab px-6 py-3.5 border-b-2 border-transparent text-gray-500 hover:text-tea-600 font-medium text-sm whitespace-nowrap transition-all duration-200">
+                    經典茗茶
+                </button>
+                <button onclick="filterMenu('milk')" id="tab-milk" class="menu-tab px-6 py-3.5 border-b-2 border-transparent text-gray-500 hover:text-tea-600 font-medium text-sm whitespace-nowrap transition-all duration-200">
+                    醇乳拿鐵
+                </button>
+                <button onclick="filterMenu('fruit')" id="tab-fruit" class="menu-tab px-6 py-3.5 border-b-2 border-transparent text-gray-500 hover:text-tea-600 font-medium text-sm whitespace-nowrap transition-all duration-200">
+                    鮮果茶飲
+                </button>
+                <button onclick="filterMenu('cheese')" id="tab-cheese" class="menu-tab px-6 py-3.5 border-b-2 border-transparent text-gray-500 hover:text-tea-600 font-medium text-sm whitespace-nowrap transition-all duration-200">
+                    芝芝奶蓋
+                </button>
+            </div>
+
+            <!-- 飲品清單網格 (Menu Grid) -->
+            <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 由 JavaScript 動態渲染飲品 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 關於我們 & 環保活動 (About & Green Initiative) -->
+    <section id="about" class="py-20 bg-sand-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                <!-- 關於我們故事內容 -->
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-sm font-bold uppercase tracking-widest text-tea-600">Our Story</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-tea-800">我是瑜，把喜歡的味道分享給你</h2>
+                    <div class="h-1 w-12 bg-tea-600"></div>
+                    <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                        我熱愛手搖飲，也喜歡研究食材、風味與比例。創立「翠葉茗軒」，是希望把一杯飲料從短暫的解渴，變成值得期待、也能放心享用的日常選擇。
+                    </p>
+                    <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                        無論是剛開始探索手搖飲的年輕朋友，或更在意成分與身體感受的成熟客人，我都希望用健康、清新、天然、純手工的堅持，創造一間 20 到 60 歲都會喜歡、願意再回來的手搖飲店。
+                    </p>
+                    
+                    <!-- 環保企劃小卡 -->
+                    <div class="bg-white p-6 rounded-2xl border border-sand-200 flex gap-4 items-start shadow-sm">
+                        <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286Zm0 13.036h.008v.008H12v-.008Z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900">綠色環保綠洲企劃</h4>
+                            <p class="text-sm text-gray-500 mt-1">
+                                自備環保杯享全品項現折 5 元折扣。我們採用 100% 可生物分解外帶紙杯與無塑紙吸管，讓我們在享受純淨茶香的同時，也對地球溫柔。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 品牌視覺輔助 -->
+                <div class="lg:col-span-6 relative flex justify-center">
+                    <div class="relative w-full max-w-md h-[400px] bg-gradient-to-tr from-tea-800 to-tea-600 rounded-3xl shadow-xl overflow-hidden flex items-center justify-center p-8">
+                        <div class="absolute inset-0 bg-black/10"></div>
+                        <!-- 茶園剪影/幾何插畫 -->
+                        <div class="relative text-center text-white space-y-4">
+                            <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-.778.099-1.533.284-2.253" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold font-playfair italic">Pure, Fresh & Sustainable</h3>
+                            <p class="text-xs text-sand-100 max-w-xs mx-auto leading-relaxed">
+                                從天然原料到手工製作，瑜用專業研發每一杯特色飲品，分享清爽、安心又有記憶點的好味道。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 購物車側邊欄 (Cart Drawer) -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+        <div class="absolute inset-0 overflow-hidden">
+            <!-- 遮罩背景 -->
+            <div onclick="toggleCart(false)" class="absolute inset-0 bg-gray-500/75 transition-opacity duration-300 backdrop-blur-sm"></div>
+
+            <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+                <div class="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out">
+                    <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-2xl">
+                        <div class="flex-1 overflow-y-auto px-6 py-6">
+                            <div class="flex items-start justify-between border-b border-gray-100 pb-5">
+                                <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-tea-600">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                    </svg>
+                                    點餐清單
+                                </h3>
+                                <button onclick="toggleCart(false)" class="p-1 text-gray-400 hover:text-gray-500 rounded-full hover:bg-gray-100">
+                                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                                </button>
+                            </div>
+
+                            <!-- 購物車商品內容 -->
+                            <div class="mt-8">
+                                <div id="cart-items-container" class="flow-root">
+                                    <!-- 由 JS 動態注入 -->
+                                    <div class="text-center py-12 text-gray-400 space-y-3">
+                                        <svg class="w-16 h-16 mx-auto stroke-current opacity-50" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                                        <p class="text-sm">購物車目前是空的，快去菜單逛逛吧！</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 總金額與結帳 -->
+                        <div class="border-t border-gray-100 px-6 py-6 bg-sand-50 space-y-4">
+                            <div class="flex justify-between text-base font-medium text-gray-900">
+                                <p>合計金額</p>
+                                <p id="cart-total" class="text-xl font-bold text-tea-700 font-playfair">$0</p>
+                            </div>
+                            <p class="text-xs text-gray-500">
+                                結帳金額含自備杯折抵與促銷活動。目前模擬線上結帳，並非真實交易。
+                            </p>
+                            <div class="flex gap-3">
+                                <button onclick="clearCart()" class="w-1/3 py-3 border border-gray-300 text-gray-700 font-semibold rounded-xl text-center hover:bg-gray-100 transition duration-200">
+                                    清空
+                                </button>
+                                <button onclick="checkout()" class="w-2/3 py-3 bg-tea-600 hover:bg-tea-700 text-white font-semibold rounded-xl text-center shadow-lg transition duration-200">
+                                    送出訂單
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 飲料客製化互動視窗 (Customizer Modal) -->
+    <div id="customizer-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-500/75 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl transform transition-all flex flex-col">
+            <!-- 標題 -->
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-sand-50 sticky top-0 z-10">
+                <div>
+                    <h3 id="custom-drink-name" class="text-lg font-bold text-tea-800">細品阿里山金萱</h3>
+                    <p id="custom-drink-base-price" class="text-sm text-sand-600 font-semibold mt-1">單價：$45</p>
+                </div>
+                <button onclick="closeCustomizer()" class="text-gray-400 hover:text-gray-500 rounded-full p-1.5 hover:bg-gray-200">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+
+            <!-- 自訂選項內容 -->
+            <div class="p-6 space-y-6 flex-grow">
+                <!-- 甜度選擇 -->
+                <div class="space-y-3">
+                    <label class="block text-sm font-bold text-gray-700 flex items-center gap-1.5">
+                        <span class="w-1 h-4 bg-tea-600 rounded"></span> 選擇甜度 (Sweetness)
+                    </label>
+                    <div class="grid grid-cols-5 gap-2">
+                        <button onclick="setCustomOption('sugar', '無糖')" class="sugar-btn py-2 text-xs font-semibold rounded-lg border border-gray-200 text-gray-700 hover:bg-tea-50 focus:outline-none transition" data-val="無糖">無糖</button>
+                        <button onclick="setCustomOption('sugar', '微糖')" class="sugar-btn py-2 text-xs font-semibold rounded-lg border border-gray-200 text-gray-700 hover:bg-tea-50 focus:outline-none transition" data-val="微糖">微糖</button>
+                        <button onclick="setCustomOption('sugar', '半糖')" class="sugar-btn py-2 text-xs font-semibold rounded-lg border border-tea-600 bg-tea-50 text-tea-700 focus:outline-none transition" data-val="半糖">半糖</button>
+                        <button onclick="setCustomOption('sugar', '少糖')" class="sugar-btn py-2 text-xs font-semibold rounded-lg border border-gray-200 text-gray-700 hover:bg-tea-50 focus:outline-none transition" data-val="少糖">少糖</button>
+                        <button onclick="setCustomOption('sugar', '全糖')" class="sugar-btn py-2 text-xs font-semibold rounded-lg border border-gray-200 text-gray-700 hover:bg-tea-50 focus:outline-none transition" data-val="全糖">全糖</button>
+                    </div>
+                </div>
+
+                <!-- 冰量選擇 -->
+                <div class="space-y-3">
+                    <label class="block text-sm font-bold text-gray-700 flex items-center gap-1.5">
+                        <span class="w-1 h-4 bg-tea-600 rounded"></span> 選擇冰量 (Ice Level)
+                    </label>
+                    <div class="grid grid-cols-4 gap-2">
+                        <button onclick="setCustomOption('ice', '去冰')" class="ice-btn py-2 text-xs font-semibold rounded-lg border border-gray-200 text-gray-700 hover:bg-tea-50 focus:outline-none transition" data-val="去冰">去冰</button>
+                        <button onclick="setCustomOption('ice', '微冰')" class="ice-btn py-2 text-xs font-semibold rounded-lg border border-tea-600 bg-tea-50 text-tea-700 focus:outline-none transition" data-val="微冰">微冰</button>
+                        <button onclick="setCustomOption('ice', '少冰')" class="ice-btn py-2 text-xs font-semibold rounded-lg border border-gray-200 text-gray-700 hover:bg-tea-50 focus:outline-none transition" data-val="少冰">少冰</button>
+                        <button onclick="setCustomOption('ice', '正常冰')" class="ice-btn py-2 text-xs font-semibold rounded-lg border border-gray-200 text-gray-700 hover:bg-tea-50 focus:outline-none transition" data-val="正常冰">正常冰</button>
+                    </div>
+                </div>
+
+                <!-- 加料區 (複選) -->
+                <div class="space-y-3">
+                    <label class="block text-sm font-bold text-gray-700 flex items-center gap-1.5">
+                        <span class="w-1 h-4 bg-tea-600 rounded"></span> 自由加料 (Toppings)
+                    </label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="toggleTopping('琥珀珍珠', 10)" class="topping-btn p-3 text-left rounded-lg border border-gray-200 hover:border-tea-600/50 flex justify-between items-center transition" data-topping="琥珀珍珠">
+                            <span class="text-xs font-semibold text-gray-700">琥珀珍珠</span>
+                            <span class="text-xs font-bold text-tea-600 font-playfair">+$10</span>
+                        </button>
+                        <button onclick="toggleTopping('椰果', 10)" class="topping-btn p-3 text-left rounded-lg border border-gray-200 hover:border-tea-600/50 flex justify-between items-center transition" data-topping="椰果">
+                            <span class="text-xs font-semibold text-gray-700">椰果</span>
+                            <span class="text-xs font-bold text-tea-600 font-playfair">+$10</span>
+                        </button>
+                        <button onclick="toggleTopping('起司奶蓋', 20)" class="topping-btn p-3 text-left rounded-lg border border-gray-200 hover:border-tea-600/50 flex justify-between items-center transition" data-topping="起司奶蓋">
+                            <span class="text-xs font-semibold text-gray-700">起司奶蓋</span>
+                            <span class="text-xs font-bold text-tea-600 font-playfair">+$20</span>
+                        </button>
+                        <button onclick="toggleTopping('鮮嫩綠茶凍', 15)" class="topping-btn p-3 text-left rounded-lg border border-gray-200 hover:border-tea-600/50 flex justify-between items-center transition" data-topping="鮮嫩綠茶凍">
+                            <span class="text-xs font-semibold text-gray-700">鮮嫩綠茶凍</span>
+                            <span class="text-xs font-bold text-tea-600 font-playfair">+$15</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 數量設定 -->
+                <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+                    <span class="text-sm font-bold text-gray-700">購買數量</span>
+                    <div class="flex items-center space-x-3 bg-gray-100 rounded-lg p-1">
+                        <button onclick="changeCustomQty(-1)" class="w-8 h-8 rounded-md hover:bg-white flex items-center justify-center font-bold text-gray-600">-</button>
+                        <span id="custom-qty" class="w-8 text-center font-bold text-gray-800">1</span>
+                        <button onclick="changeCustomQty(1)" class="w-8 h-8 rounded-md hover:bg-white flex items-center justify-center font-bold text-gray-600">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底層確認加點按鈕 -->
+            <div class="p-6 border-t border-gray-100 bg-sand-50 sticky bottom-0 z-10">
+                <button onclick="addCustomizedToCart()" class="w-full py-4 bg-tea-600 hover:bg-tea-700 text-white font-semibold rounded-xl text-center shadow-md hover:shadow-lg transition flex justify-between px-6">
+                    <span>確認加入點餐單</span>
+                    <span id="custom-total-display" class="font-playfair">$0</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 自訂訊息對話框 (Custom Toast Modal) -->
+    <div id="toast-modal" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-gray-900 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3">
+            <div id="toast-icon-success" class="text-emerald-400">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <p id="toast-message" class="text-sm font-semibold">成功加到點餐清單！</p>
+        </div>
+    </div>
+
+    <!-- 頁腳 (Footer) -->
+    <footer class="bg-tea-900 text-sand-50 mt-auto border-t border-tea-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <!-- 品牌資訊 -->
+                <div class="space-y-4 col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" />
+                            </svg>
+                        </div>
+                        <span class="text-lg font-bold tracking-wider">翠葉茗軒</span>
+                    </div>
+                    <p class="text-teal-100/60 text-xs sm:text-sm leading-relaxed max-w-sm">
+                        瑜的特色手搖飲，以健康、清新、天然、純手工為核心，為每個年齡的日常調製一杯安心好味道。
+                    </p>
+                    <div class="flex gap-4 pt-2">
+                        <!-- 社群連結示意 -->
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
+                            <span class="text-xs">FB</span>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
+                            <span class="text-xs">IG</span>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
+                            <span class="text-xs">LINE</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 店鋪聯絡資訊 -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-bold uppercase tracking-widest text-sand-200">大安創始店</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-teal-100/60">
+                        <li class="flex items-center gap-2">
+                            <span>📍 台北市大安區新生南路三段 88 號</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span>📞 (02) 2366-8888</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span>🕒 每日 10:00 - 22:00</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 導覽連結 -->
+                <div class="space-y-4">
+                    <h4 class="text-sm font-bold uppercase tracking-widest text-sand-200">快速連結</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-teal-100/60">
+                        <li><a href="#features" class="hover:text-white transition">品牌特色</a></li>
+                        <li><a href="#products" class="hover:text-white transition">人氣推薦</a></li>
+                        <li><a href="#menu-section" class="hover:text-white transition">線上點餐菜單</a></li>
+                        <li><a href="#about" class="hover:text-white transition">關於我們</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-tea-800 mt-12 pt-8 text-center text-xs text-teal-100/40 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>© 2026 翠葉茗軒 Green Leaf Tea House. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:underline">隱私權政策</a>
+                    <a href="#" class="hover:underline">服務條款</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript 業務邏輯 -->
+    <script>
+        // 1. 菜單飲品原始資料
+        const menuItems = [
+            // 經典茗茶 (tea)
+            { id: 't1', name: '高山金萱茶', price: 40, category: 'tea', description: '高海拔嚴選金萱，清淡奶香優雅回甘。', popular: false },
+            { id: 't2', name: '初霧青茶', price: 40, category: 'tea', description: '如晨曦初霧般芬芳怡人，湯色翠綠透亮。', popular: false },
+            { id: 't3', name: '斯里紅茶', price: 40, category: 'tea', description: '嚴選斯里蘭卡莊園紅茶，喉韻醇厚圓潤。', popular: false },
+            { id: 't4', name: '翡翠綠茶', price: 40, category: 'tea', description: '帶有淡淡茉莉花香，清甜去膩。', popular: false },
+            
+            // 醇乳拿鐵 (milk)
+            { id: 'm1', name: '黑糖琥珀珍珠鮮奶', price: 75, category: 'milk', description: '每日現慢火熬煮黑糖琥珀珍珠搭配在地鮮牛乳。', popular: true },
+            { id: 'm2', name: '炭焙金萱鮮奶茶', price: 65, category: 'milk', description: '獨家炭焙工藝金萱茶底搭配醇滑乳香。', popular: false },
+            { id: 'm3', name: '伯爵鮮奶茶拿鐵', price: 65, category: 'milk', description: '佛手柑香氣的優雅英式伯爵與小農鮮乳完美揉合。', popular: false },
+
+            // 鮮果茶飲 (fruit)
+            { id: 'f1', name: '霸氣柳橙四季春', price: 70, category: 'fruit', description: '松柏嶺四季春搭配鮮切爆汁柳橙與手工茉莉茶凍。', popular: true },
+            { id: 'f2', name: '鮮榨鳳梨熟成紅茶', price: 65, category: 'fruit', description: '金鑽鳳梨手工蜜漬熬製，清甜鳳梨與熟成紅茶的碰撞。', popular: false },
+            { id: 'f3', name: '鮮柚翡翠冰茶', price: 70, category: 'fruit', description: '爆粒紅柚與爽口翡翠綠茶，回甘帶微酸甜果香。', popular: false },
+
+            // 芝芝奶蓋 (cheese)
+            { id: 'c1', name: '皇家芝芝紅茶拿鐵', price: 80, category: 'cheese', description: '雙重重奏：濃醇紅茶拿鐵覆蓋厚實法國起司鹹甜奶蓋。', popular: true },
+            { id: 'c2', name: '芝芝芒芒雪泥', price: 85, category: 'cheese', description: '夏天人氣必點！愛文芒果雪泥搭配爆棚芝芝奶蓋。', popular: false },
+            { id: 'c3', name: '芝芝翠玉四季春', price: 70, category: 'cheese', description: '四季春茶香四溢，覆蓋奶香撲鼻的綿密芝芝。', popular: false },
+        ];
+
+        // 2. 當前應用狀態 State
+        let cart = [];
+        let currentCustomItem = {
+            name: '',
+            basePrice: 0,
+            sugar: '半糖',
+            ice: '微冰',
+            toppings: [], // [{name: string, price: number}]
+            quantity: 1
+        };
+
+        // 3. 初始渲染
+        window.addEventListener('DOMContentLoaded', () => {
+            renderMenu('all');
+            updateCartUI();
+        });
+
+        // 4. 渲染菜單
+        function renderMenu(category) {
+            const grid = document.getElementById('menu-grid');
+            grid.innerHTML = '';
+
+            const filtered = category === 'all' 
+                ? menuItems 
+                : menuItems.filter(item => item.category === category);
+
+            filtered.forEach(item => {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'bg-sand-50/50 rounded-2xl p-6 border border-sand-100 hover:border-tea-600/20 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col justify-between';
+                
+                itemEl.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                                ${item.name}
+                                ${item.popular ? '<span class="px-2 py-0.5 bg-amber-100 text-amber-800 text-[10px] font-bold rounded-md">必點</span>' : ''}
+                            </h3>
+                            <span class="text-base font-bold text-tea-700 font-playfair">$${item.price}</span>
+                        </div>
+                        <p class="text-gray-500 text-xs sm:text-sm leading-relaxed mb-6">
+                            ${item.description}
+                        </p>
+                    </div>
+                    <button onclick="openCustomizer('${item.name}', ${item.price})" class="w-full py-2.5 bg-tea-50 text-tea-700 hover:bg-tea-600 hover:text-white font-medium rounded-xl transition-all duration-300 flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                        加點 / 客製化
+                    </button>
+                `;
+                grid.appendChild(itemEl);
+            });
+        }
+
+        // 切換菜單頁籤
+        function filterMenu(category) {
+            // 切換 CSS
+            document.querySelectorAll('.menu-tab').forEach(tab => {
+                tab.classList.remove('border-tea-600', 'text-tea-700', 'font-semibold');
+                tab.classList.add('border-transparent', 'text-gray-500', 'font-medium');
+            });
+
+            const activeTab = document.getElementById(`tab-${category}`);
+            if (activeTab) {
+                activeTab.classList.remove('border-transparent', 'text-gray-500', 'font-medium');
+                activeTab.classList.add('border-tea-600', 'text-tea-700', 'font-semibold');
+            }
+
+            renderMenu(category);
+        }
+
+        // 5. 客製化視窗控制
+        function openCustomizer(drinkName, price) {
+            // 重置客製化臨時狀態
+            currentCustomItem = {
+                name: drinkName,
+                basePrice: price,
+                sugar: '半糖',
+                ice: '微冰',
+                toppings: [],
+                quantity: 1
+            };
+
+            // 渲染視窗上的基本資料
+            document.getElementById('custom-drink-name').innerText = drinkName;
+            document.getElementById('custom-drink-base-price').innerText = `單價：$${price}`;
+            
+            // 更新視窗選項樣式
+            updateCustomizerUI();
+
+            // 顯示視窗
+            const modal = document.getElementById('customizer-modal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeCustomizer() {
+            const modal = document.getElementById('customizer-modal');
+            modal.classList.add('hidden');
+        }
+
+        // 設定糖、冰
+        function setCustomOption(type, value) {
+            if (type === 'sugar') {
+                currentCustomItem.sugar = value;
+            } else if (type === 'ice') {
+                currentCustomItem.ice = value;
+            }
+            updateCustomizerUI();
+        }
+
+        // 切換配料選擇
+        function toggleTopping(name, price) {
+            const index = currentCustomItem.toppings.findIndex(t => t.name === name);
+            if (index > -1) {
+                currentCustomItem.toppings.splice(index, 1);
+            } else {
+                currentCustomItem.toppings.push({ name, price });
+            }
+            updateCustomizerUI();
+        }
+
+        // 數量變更
+        function changeCustomQty(amount) {
+            const target = currentCustomItem.quantity + amount;
+            if (target >= 1 && target <= 20) {
+                currentCustomItem.quantity = target;
+                updateCustomizerUI();
+            }
+        }
+
+        // 重新同步客製化面板按鈕選中樣式與金額
+        function updateCustomizerUI() {
+            // 糖度按鈕
+            document.querySelectorAll('.sugar-btn').forEach(btn => {
+                const val = btn.getAttribute('data-val');
+                if (val === currentCustomItem.sugar) {
+                    btn.className = 'sugar-btn py-2 text-xs font-semibold rounded-lg border border-tea-600 bg-tea-50 text-tea-700 focus:outline-none transition-all';
+                } else {
+                    btn.className = 'sugar-btn py-2 text-xs font-semibold rounded-lg border border-gray-200 text-gray-700 hover:bg-tea-50 focus:outline-none transition-all';
+                }
+            });
+
+            // 冰度按鈕
+            document.querySelectorAll('.ice-btn').forEach(btn => {
+                const val = btn.getAttribute('data-val');
+                if (val === currentCustomItem.ice) {
+                    btn.className = 'ice-btn py-2 text-xs font-semibold rounded-lg border border-tea-600 bg-tea-50 text-tea-700 focus:outline-none transition-all';
+                } else {
+                    btn.className = 'ice-btn py-2 text-xs font-semibold rounded-lg border border-gray-200 text-gray-700 hover:bg-tea-50 focus:outline-none transition-all';
+                }
+            });
+
+            // 配料按鈕
+            document.querySelectorAll('.topping-btn').forEach(btn => {
+                const toppingName = btn.getAttribute('data-topping');
+                const isSelected = currentCustomItem.toppings.some(t => t.name === toppingName);
+                if (isSelected) {
+                    btn.className = 'topping-btn p-3 text-left rounded-lg border border-tea-600 bg-tea-50 flex justify-between items-center transition-all';
+                } else {
+                    btn.className = 'topping-btn p-3 text-left rounded-lg border border-gray-200 hover:border-tea-600/50 flex justify-between items-center transition-all';
+                }
+            });
+
+            // 數量
+            document.getElementById('custom-qty').innerText = currentCustomItem.quantity;
+
+            // 計算總價
+            const total = calculateSingleDrinkPrice() * currentCustomItem.quantity;
+            document.getElementById('custom-total-display').innerText = `$${total}`;
+        }
+
+        // 計算客製化後單杯價格
+        function calculateSingleDrinkPrice() {
+            let price = currentCustomItem.basePrice;
+            currentCustomItem.toppings.forEach(t => {
+                price += t.price;
+            });
+            return price;
+        }
+
+        // 6. 購物車邏輯
+        function addCustomizedToCart() {
+            // 複製當前選項，加入購物車
+            const itemToPush = JSON.parse(JSON.stringify(currentCustomItem));
+            // 產生唯一代碼
+            itemToPush.cartId = Date.now().toString() + Math.random().toString(36).substr(2, 5);
+            
+            cart.push(itemToPush);
+            
+            // 關閉客製化視窗
+            closeCustomizer();
+            
+            // 更新購物車 UI & 顯示通知
+            updateCartUI();
+            showToast(`成功加入：${itemToPush.name} ${itemToPush.quantity} 杯！`);
+        }
+
+        function removeCartItem(cartId) {
+            cart = cart.filter(item => item.cartId !== cartId);
+            updateCartUI();
+        }
+
+        function clearCart() {
+            if (cart.length === 0) return;
+            cart = [];
+            updateCartUI();
+            showToast('已清空您的點餐清單。');
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const badge = document.getElementById('cart-badge');
+            const totalDisplay = document.getElementById('cart-total');
+
+            // 計算總數
+            const totalCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+            
+            // badge 動效
+            if (totalCount > 0) {
+                badge.innerText = totalCount;
+                badge.classList.remove('scale-0');
+                badge.classList.add('scale-100');
+            } else {
+                badge.classList.remove('scale-100');
+                badge.classList.add('scale-0');
+            }
+
+            // 渲染列表
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 text-gray-400 space-y-3">
+                        <svg class="w-16 h-16 mx-auto stroke-current opacity-40" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                        <p class="text-sm">購物車目前是空的，快去菜單逛逛吧！</p>
+                    </div>
+                `;
+                totalDisplay.innerText = '$0';
+                return;
+            }
+
+            container.innerHTML = '';
+            let grandTotal = 0;
+
+            cart.forEach(item => {
+                const singlePrice = item.basePrice + item.toppings.reduce((acc, t) => acc + t.price, 0);
+                const itemTotal = singlePrice * item.quantity;
+                grandTotal += itemTotal;
+
+                const toppingStr = item.toppings.length > 0 
+                    ? `+ ${item.toppings.map(t => t.name).join(', ')}`
+                    : '無額外配料';
+
+                const itemEl = document.createElement('div');
+                itemEl.className = 'flex py-5 border-b border-gray-100 gap-4 items-start';
+                itemEl.innerHTML = `
+                    <div class="flex-grow">
+                        <div class="flex justify-between font-bold text-gray-900 text-sm">
+                            <h4>${item.name}</h4>
+                            <span class="font-playfair text-tea-700">$${itemTotal}</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">
+                            ${item.sugar} | ${item.ice} | <span class="text-sand-600">${toppingStr}</span>
+                        </p>
+                        <div class="flex items-center justify-between mt-3">
+                            <span class="text-xs text-gray-500">數量：${item.quantity} 杯 (單杯 $${singlePrice})</span>
+                            <button onclick="removeCartItem('${item.cartId}')" class="text-xs text-red-500 hover:text-red-700 hover:underline">
+                                刪除
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(itemEl);
+            });
+
+            totalDisplay.innerText = `$${grandTotal}`;
+        }
+
+        // 開關購物車側欄
+        function toggleCart(isOpen) {
+            const drawer = document.getElementById('cart-drawer');
+            if (isOpen) {
+                drawer.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // 防止背後滾動
+            } else {
+                drawer.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // 模擬結帳
+        function checkout() {
+            if (cart.length === 0) {
+                showToast('您的購物車中沒有飲品喔！');
+                return;
+            }
+
+            // 關閉購物車側邊欄
+            toggleCart(false);
+
+            // 顯示成功客製彈窗訊息
+            showToast('🎉 模擬點餐成功！廚房正在努力調配您的黃金茶飲囉！', true);
+            
+            // 清空購物車
+            cart = [];
+            updateCartUI();
+        }
+
+        // 7. 自訂訊息通知 (Toast) 邏輯
+        let toastTimeout;
+        function showToast(msg, isSuccess = true) {
+            const toast = document.getElementById('toast-modal');
+            const messageText = document.getElementById('toast-message');
+            const successIcon = document.getElementById('toast-icon-success');
+
+            messageText.innerText = msg;
+            
+            // 顯示與轉場效果
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        // 8. 行動版選單開關
+        let isMobileMenuOpen = false;
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const openIcon = document.getElementById('menu-icon-open');
+            const closeIcon = document.getElementById('menu-icon-close');
+            
+            isMobileMenuOpen = !isMobileMenuOpen;
+            
+            if (isMobileMenuOpen) {
+                menu.classList.remove('hidden');
+                openIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+                openIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
