@@ -114,6 +114,7 @@
                     <a href="#products" class="text-gray-600 hover:text-tea-600 font-medium transition-colors">人氣推薦</a>
                     <a href="#menu-section" class="text-gray-600 hover:text-tea-600 font-medium transition-colors">線上菜單</a>
                     <a href="#about" class="text-gray-600 hover:text-tea-600 font-medium transition-colors">關於我們</a>
+                    <a href="#booking" class="px-5 py-2.5 bg-tea-600 hover:bg-tea-700 text-white font-semibold rounded-xl shadow-sm transition-all">立即預約</a>
                 </nav>
 
                 <!-- 右側按鈕：購物車、行動選單 -->
@@ -142,6 +143,7 @@
                 <a href="#products" onclick="toggleMobileMenu()" class="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-tea-50 hover:text-tea-700 rounded-lg">人氣推薦</a>
                 <a href="#menu-section" onclick="toggleMobileMenu()" class="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-tea-50 hover:text-tea-700 rounded-lg">線上菜單</a>
                 <a href="#about" onclick="toggleMobileMenu()" class="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-tea-50 hover:text-tea-700 rounded-lg">關於我們</a>
+                <a href="#booking" onclick="toggleMobileMenu()" class="block px-4 py-2.5 text-base font-semibold bg-tea-600 text-white hover:bg-tea-700 rounded-lg">立即預約</a>
             </div>
         </div>
     </header>
@@ -687,6 +689,28 @@
         </div>
     </section>
 
+    <!-- 線上預約 -->
+    <section id="booking" class="relative py-20 bg-tea-800 overflow-hidden" aria-labelledby="booking-title">
+        <div class="absolute w-72 h-72 rounded-full bg-sand-200/20 -top-24 -right-20"></div>
+        <div class="absolute w-52 h-52 rounded-full bg-accent-400/20 -bottom-24 -left-16"></div>
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-8 h-8" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3.75 9h16.5m-15 12h13.5a1.5 1.5 0 0 0 1.5-1.5V6.75a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5V19.5a1.5 1.5 0 0 0 1.5 1.5Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m9 15 1.5 1.5L15 12" />
+                </svg>
+            </div>
+            <span class="block text-xs font-bold uppercase tracking-[0.24em] text-sand-200 mt-6">Online Booking</span>
+            <h2 id="booking-title" class="text-3xl sm:text-4xl font-bold mt-3">預約一場專屬的手搖飲體驗</h2>
+            <p class="max-w-2xl mx-auto text-white/75 mt-5 leading-relaxed">選擇適合你的日期與時段，透過 Google 預約表快速完成預約。我們期待為你準備一杯充滿新鮮與手作溫度的特色飲品。</p>
+            <a href="https://calendar.app.google/oRaQ5X1rZkwHwdzUA" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 mt-9 px-8 py-4 bg-accent-400 hover:bg-accent-500 text-accent-700 font-bold rounded-xl shadow-lg hover:-translate-y-0.5 transition-all">
+                開啟預約表
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5H19.5V10.5M19 5L10 14M6.75 6.75H5.25A1.5 1.5 0 0 0 3.75 8.25V18.75A1.5 1.5 0 0 0 5.25 20.25H15.75A1.5 1.5 0 0 0 17.25 18.75V17.25" /></svg>
+            </a>
+            <p class="text-xs text-white/50 mt-4">預約表將在新分頁開啟</p>
+        </div>
+    </section>
+
     <!-- 頁腳 (Footer) -->
     <footer class="bg-tea-900 text-sand-50 mt-auto border-t border-tea-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -730,6 +754,7 @@
                         <li><a href="#products" class="hover:text-white transition">人氣推薦</a></li>
                         <li><a href="#menu-section" class="hover:text-white transition">線上點餐菜單</a></li>
                         <li><a href="#about" class="hover:text-white transition">關於我們</a></li>
+                        <li><a href="#booking" class="hover:text-white transition">線上預約</a></li>
                     </ul>
                 </div>
             </div>
