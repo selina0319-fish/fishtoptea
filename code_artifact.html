@@ -11,20 +11,42 @@
             theme: {
                 extend: {
                     colors: {
+                        white: '#FEFEFE',
+                        black: '#646464',
+                        accent: {
+                            100: '#FFF4CC',
+                            400: '#F4C95D',
+                            500: '#E9B93F',
+                            700: '#7A5A12',
+                        },
                         tea: {
-                            50: '#f4f7f4',
-                            100: '#e3ebe2',
-                            600: '#4a6b51',
-                            700: '#3b5440',
-                            800: '#2d3f31',
-                            900: '#1e2920',
+                            50: '#FEFEFE',
+                            100: '#DBE1E3',
+                            500: '#0DB3E4',
+                            600: '#00B1E2',
+                            700: '#0092BC',
+                            800: '#0092BC',
+                            900: '#0092BC',
+                            950: '#646464',
                         },
                         sand: {
-                            50: '#faf8f5',
-                            100: '#f3ede4',
-                            200: '#e6dac9',
-                            600: '#b89c72',
-                            700: '#9c7f54',
+                            50: '#FEFEFE',
+                            100: '#DBE1E3',
+                            200: '#8DD3E6',
+                            600: '#00B1E2',
+                            700: '#0092BC',
+                        },
+                        gray: {
+                            50: '#FEFEFE',
+                            100: '#DBE1E3',
+                            200: '#DBE1E3',
+                            300: '#8DD3E6',
+                            400: '#8DD3E6',
+                            500: '#646464',
+                            600: '#646464',
+                            700: '#646464',
+                            800: '#646464',
+                            900: '#646464',
                         }
                     },
                     fontFamily: {
@@ -39,7 +61,28 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-blue: #00B1E2;
+            --primary-deep: #0092BC;
+            --soft-aqua: #8DD3E6;
+            --mist-gray: #DBE1E3;
+            --cta-aqua: #0DB3E4;
+            --warm-white: #FEFEFE;
+            --charcoal-gray: #646464;
+            --warm-yellow: #F4C95D;
+        }
         .font-playfair { font-family: 'Playfair Display', serif; }
+        .hero-video-frame {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 56.25vw;
+            min-width: 177.78vh;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
         /* 隱藏滾動條但保持功能 */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -80,7 +123,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                         </svg>
-                        <span id="cart-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white scale-0 transition-transform duration-300">0</span>
+                        <span id="cart-badge" class="absolute -top-1 -right-1 bg-tea-500 text-white text-[11px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white scale-0 transition-transform duration-300">0</span>
                     </button>
 
                     <!-- 行動版選單開關 -->
@@ -104,7 +147,19 @@
     </header>
 
     <!-- Hero 主視覺區 -->
-    <section class="relative bg-tea-900 text-white py-24 md:py-32 overflow-hidden flex items-center">
+    <section class="relative min-h-[calc(100svh-5rem)] bg-tea-900 text-white py-20 md:py-28 overflow-hidden flex items-center">
+        <!-- 滿版 YouTube 背景影片；圖片提供影片載入前的視覺備援 -->
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('pexels-alberto-lara-25433440-35727299.jpg');">
+            <iframe
+                class="hero-video-frame"
+                src="https://www.youtube.com/embed/LmnC0F7elzQ?autoplay=1&mute=1&controls=0&loop=1&playlist=LmnC0F7elzQ&playsinline=1&rel=0&modestbranding=1&disablekb=1"
+                title="翠葉茗軒品牌背景影片"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                referrerpolicy="strict-origin-when-cross-origin"
+                tabindex="-1"
+                aria-hidden="true"
+            ></iframe>
+        </div>
         <!-- 裝飾背景圖案 -->
         <div class="absolute inset-0 opacity-10">
             <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
@@ -118,20 +173,20 @@
         </div>
         
         <!-- 背景漸層遮罩 -->
-        <div class="absolute inset-0 bg-gradient-to-r from-tea-950 via-tea-900/90 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-tea-950/90 via-tea-900/70 to-tea-700/35"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="lg:col-span-8 space-y-6 text-center lg:text-left">
                     <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-tea-700/60 border border-tea-500/30 rounded-full text-xs font-semibold uppercase tracking-widest text-sand-200">
-                        <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-ping"></span>
+                        <span class="w-1.5 h-1.5 bg-accent-400 rounded-full animate-ping"></span>
                         瑜的手作茶飲提案
                     </span>
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
                         把健康與清新，<br class="hidden sm:block"/>
                         <span class="text-sand-200 font-serif italic">手作</span>成每一杯日常。
                     </h1>
-                    <p class="text-base sm:text-lg text-teal-100/80 max-w-xl mx-auto lg:mx-0">
+                    <p class="text-base sm:text-lg text-sand-50/80 max-w-xl mx-auto lg:mx-0">
                         我是瑜，熱愛手搖飲，也熱愛把研發出的特色風味分享給大家。從天然選材、清爽配方到每日純手工製作，只想讓 20 到 60 歲的每一位你，都能安心找到喜歡的一杯。
                     </p>
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
@@ -144,39 +199,6 @@
                     </div>
                 </div>
 
-                <!-- 亮點飲料大圖 -->
-                <div class="lg:col-span-5 relative flex justify-center">
-                    <div class="relative w-72 h-96 sm:w-80 sm:h-[420px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/15 rotate-2 hover:rotate-0 transition-transform duration-500 bg-tea-800">
-                        <!-- 茶飲示意圖 (使用精緻的 SVG 與漸層模擬茶杯，確保在沒有外部網路圖片時也能完美呈現) -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-amber-900/60 to-transparent z-10"></div>
-                        <div class="absolute inset-0 flex flex-col justify-between p-6 z-20">
-                            <span class="self-start px-2 py-1 bg-white/25 backdrop-blur-md rounded text-[10px] tracking-widest font-bold">SIGNATURE</span>
-                            <div class="text-white">
-                                <h3 class="text-xl font-bold">翠玉芝芝奶蓋</h3>
-                                <p class="text-xs text-sand-100 mt-1">選自阿里山高山金萱茶底</p>
-                            </div>
-                        </div>
-                        
-                        <!-- 藝術感茶杯繪圖 (模擬大自然手搖飲氛圍) -->
-                        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-emerald-800 to-amber-700">
-                            <svg class="w-48 h-48 opacity-40 text-sand-200" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M30 20 L35 80 Q35 85 40 85 L60 85 Q65 85 65 80 L70 20 Z" />
-                                <path d="M30 30 Q50 35 70 30" />
-                                <path d="M33 50 Q50 55 67 50" />
-                                <circle cx="45" cy="65" r="3" fill="currentColor"/>
-                                <circle cx="55" cy="70" r="3.5" fill="currentColor"/>
-                                <circle cx="40" cy="73" r="2.5" fill="currentColor"/>
-                                <circle cx="60" cy="62" r="3" fill="currentColor"/>
-                                <path d="M31 10 Q50 25 69 10" stroke-dasharray="3,3" />
-                            </svg>
-                        </div>
-                    </div>
-                    <!-- 裝飾徽章 -->
-                    <div class="absolute -bottom-6 -left-6 bg-sand-200 text-tea-900 w-24 h-24 rounded-full p-2 flex flex-col items-center justify-center text-center shadow-lg border-2 border-white animate-bounce-slow">
-                        <span class="font-playfair font-bold text-lg leading-tight">FREE</span>
-                        <span class="text-[9px] font-bold tracking-wider leading-none">自備環保杯<br/>折 5 元</span>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -271,16 +293,16 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- 人氣 1 -->
                 <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group">
-                    <div class="relative h-64 bg-emerald-900 overflow-hidden flex items-center justify-center text-white">
+                    <div class="relative h-64 bg-tea-800 overflow-hidden flex items-center justify-center text-white">
                         <!-- 擬真茶飲背景 -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-amber-800 to-emerald-950"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-tea-700 to-tea-950"></div>
                         <div class="absolute inset-0 flex items-center justify-center p-4">
                             <!--  -->
                             <svg class="w-28 h-28 text-white opacity-40 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M5 5l14 14M5 19L19 5" />
                             </svg>
                         </div>
-                        <div class="absolute top-4 left-4 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        <div class="absolute top-4 left-4 bg-accent-400 text-accent-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                             NO.1 熱銷
                         </div>
                     </div>
@@ -302,9 +324,9 @@
 
                 <!-- 人氣 2 -->
                 <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group">
-                    <div class="relative h-64 bg-amber-950 overflow-hidden flex items-center justify-center text-white">
+                    <div class="relative h-64 bg-tea-950 overflow-hidden flex items-center justify-center text-white">
                         <!-- 擬真茶飲背景 -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-700 to-amber-900"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-tea-600 to-tea-800"></div>
                         <div class="absolute inset-0 flex items-center justify-center p-4">
                             <!--  -->
                             <svg class="w-28 h-28 text-white opacity-40 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
@@ -312,7 +334,7 @@
                                 <path d="M8 12h8m-4-4v8" />
                             </svg>
                         </div>
-                        <div class="absolute top-4 left-4 bg-tea-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        <div class="absolute top-4 left-4 bg-accent-100 text-accent-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                             經典強推
                         </div>
                     </div>
@@ -334,16 +356,16 @@
 
                 <!-- 人氣 3 -->
                 <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group">
-                    <div class="relative h-64 bg-yellow-900 overflow-hidden flex items-center justify-center text-white">
+                    <div class="relative h-64 bg-tea-700 overflow-hidden flex items-center justify-center text-white">
                         <!-- 擬真茶飲背景 -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-yellow-500 to-emerald-800"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-sand-200 to-tea-700"></div>
                         <div class="absolute inset-0 flex items-center justify-center p-4">
                             <!--  -->
                             <svg class="w-28 h-28 text-white opacity-40 group-hover:scale-110 transition-transform duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                                 <path d="M12 2L2 22h20L12 2z" />
                             </svg>
                         </div>
-                        <div class="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        <div class="absolute top-4 left-4 bg-accent-400 text-accent-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                             清爽首選
                         </div>
                     </div>
@@ -422,7 +444,7 @@
                     
                     <!-- 環保企劃小卡 -->
                     <div class="bg-white p-6 rounded-2xl border border-sand-200 flex gap-4 items-start shadow-sm">
-                        <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl flex-shrink-0">
+                        <div class="p-3 bg-tea-50 text-tea-600 rounded-xl flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286Zm0 13.036h.008v.008H12v-.008Z" />
                             </svg>
@@ -608,12 +630,52 @@
     <!-- 自訂訊息對話框 (Custom Toast Modal) -->
     <div id="toast-modal" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
         <div class="bg-gray-900 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3">
-            <div id="toast-icon-success" class="text-emerald-400">
+            <div id="toast-icon-success" class="text-sand-200">
                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             </div>
             <p id="toast-message" class="text-sm font-semibold">成功加到點餐清單！</p>
         </div>
     </div>
+
+    <!-- 社群平台預留區 (Social Dependencies) -->
+    <section id="social" class="py-16 bg-white border-t border-sand-100" aria-labelledby="social-title">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-9">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-[0.22em] text-sand-600">Social Dependencies</span>
+                    <h2 id="social-title" class="text-2xl sm:text-3xl font-bold text-tea-800 mt-2">在社群上找到瑜</h2>
+                </div>
+                <p class="text-sm text-gray-500 max-w-lg">最新飲品研發、手作日常與限定消息，將陸續在以下平台與你分享。</p>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4" aria-label="社群平台（即將開放）">
+                <div class="group flex items-center gap-4 p-4 sm:p-5 rounded-2xl border border-sand-200 bg-sand-50/60" aria-label="LINE，敬請期待">
+                    <div class="w-11 h-11 rounded-xl bg-tea-600 text-white flex items-center justify-center shadow-sm flex-shrink-0">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" aria-hidden="true"><path d="M21.5 10.1c0-4.25-4.26-7.7-9.5-7.7s-9.5 3.45-9.5 7.7c0 3.81 3.38 7 7.95 7.6.31.07.73.21.84.48.1.25.06.64.03.89l-.14.84c-.04.25-.2.99.82.54 1.02-.44 5.5-3.24 7.5-5.55 1.38-1.52 2-3.06 2-4.8Z"/></svg>
+                    </div>
+                    <div class="min-w-0"><p class="font-bold text-gray-900">LINE</p><p class="text-xs text-gray-400 mt-0.5">即將開放</p></div>
+                </div>
+                <div class="group flex items-center gap-4 p-4 sm:p-5 rounded-2xl border border-sand-200 bg-sand-50/60" aria-label="Facebook，敬請期待">
+                    <div class="w-11 h-11 rounded-xl bg-tea-600 text-white flex items-center justify-center shadow-sm flex-shrink-0">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" aria-hidden="true"><path d="M13.6 22v-9h3l.45-3.5H13.6V7.27c0-1.01.28-1.7 1.73-1.7h1.85V2.44a24.8 24.8 0 0 0-2.7-.14c-2.67 0-4.5 1.63-4.5 4.63V9.5H7v3.5h2.98v9h3.62Z"/></svg>
+                    </div>
+                    <div class="min-w-0"><p class="font-bold text-gray-900">Facebook</p><p class="text-xs text-gray-400 mt-0.5">即將開放</p></div>
+                </div>
+                <div class="group flex items-center gap-4 p-4 sm:p-5 rounded-2xl border border-sand-200 bg-sand-50/60" aria-label="YouTube，敬請期待">
+                    <div class="w-11 h-11 rounded-xl bg-tea-600 text-white flex items-center justify-center shadow-sm flex-shrink-0">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.12C19.54 3.58 12 3.58 12 3.58s-7.54 0-9.4.5A3 3 0 0 0 .5 6.2 31.2 31.2 0 0 0 0 12a31.2 31.2 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.12c1.86.5 9.4.5 9.4.5s7.54 0 9.4-.5a3 3 0 0 0 2.1-2.12A31.2 31.2 0 0 0 24 12a31.2 31.2 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.24 3.6-6.24 3.6Z"/></svg>
+                    </div>
+                    <div class="min-w-0"><p class="font-bold text-gray-900">YouTube</p><p class="text-xs text-gray-400 mt-0.5">即將開放</p></div>
+                </div>
+                <div class="group flex items-center gap-4 p-4 sm:p-5 rounded-2xl border border-sand-200 bg-sand-50/60" aria-label="Instagram，敬請期待">
+                    <div class="w-11 h-11 rounded-xl bg-tea-600 text-white flex items-center justify-center shadow-sm flex-shrink-0">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                    </div>
+                    <div class="min-w-0"><p class="font-bold text-gray-900">Instagram</p><p class="text-xs text-gray-400 mt-0.5">即將開放</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- 頁腳 (Footer) -->
     <footer class="bg-tea-900 text-sand-50 mt-auto border-t border-tea-800">
@@ -629,27 +691,15 @@
                         </div>
                         <span class="text-lg font-bold tracking-wider">翠葉茗軒</span>
                     </div>
-                    <p class="text-teal-100/60 text-xs sm:text-sm leading-relaxed max-w-sm">
+                    <p class="text-sand-50/60 text-xs sm:text-sm leading-relaxed max-w-sm">
                         瑜的特色手搖飲，以健康、清新、天然、純手工為核心，為每個年齡的日常調製一杯安心好味道。
                     </p>
-                    <div class="flex gap-4 pt-2">
-                        <!-- 社群連結示意 -->
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
-                            <span class="text-xs">FB</span>
-                        </a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
-                            <span class="text-xs">IG</span>
-                        </a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
-                            <span class="text-xs">LINE</span>
-                        </a>
-                    </div>
                 </div>
 
                 <!-- 店鋪聯絡資訊 -->
                 <div class="space-y-4">
                     <h4 class="text-sm font-bold uppercase tracking-widest text-sand-200">大安創始店</h4>
-                    <ul class="space-y-2 text-xs sm:text-sm text-teal-100/60">
+                    <ul class="space-y-2 text-xs sm:text-sm text-sand-50/60">
                         <li class="flex items-center gap-2">
                             <span>📍 台北市大安區新生南路三段 88 號</span>
                         </li>
@@ -665,7 +715,7 @@
                 <!-- 導覽連結 -->
                 <div class="space-y-4">
                     <h4 class="text-sm font-bold uppercase tracking-widest text-sand-200">快速連結</h4>
-                    <ul class="space-y-2 text-xs sm:text-sm text-teal-100/60">
+                    <ul class="space-y-2 text-xs sm:text-sm text-sand-50/60">
                         <li><a href="#features" class="hover:text-white transition">品牌特色</a></li>
                         <li><a href="#products" class="hover:text-white transition">人氣推薦</a></li>
                         <li><a href="#menu-section" class="hover:text-white transition">線上點餐菜單</a></li>
@@ -674,7 +724,7 @@
                 </div>
             </div>
 
-            <div class="border-t border-tea-800 mt-12 pt-8 text-center text-xs text-teal-100/40 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="border-t border-tea-800 mt-12 pt-8 text-center text-xs text-sand-50/40 flex flex-col sm:flex-row justify-between items-center gap-4">
                 <p>© 2026 翠葉茗軒 Green Leaf Tea House. All rights reserved.</p>
                 <div class="flex gap-4">
                     <a href="#" class="hover:underline">隱私權政策</a>
@@ -745,7 +795,7 @@
                         <div class="flex justify-between items-start mb-2">
                             <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2">
                                 ${item.name}
-                                ${item.popular ? '<span class="px-2 py-0.5 bg-amber-100 text-amber-800 text-[10px] font-bold rounded-md">必點</span>' : ''}
+                                ${item.popular ? '<span class="px-2 py-0.5 bg-accent-100 text-accent-700 text-[10px] font-bold rounded-md">必點</span>' : ''}
                             </h3>
                             <span class="text-base font-bold text-tea-700 font-playfair">$${item.price}</span>
                         </div>
@@ -972,7 +1022,7 @@
                         </p>
                         <div class="flex items-center justify-between mt-3">
                             <span class="text-xs text-gray-500">數量：${item.quantity} 杯 (單杯 $${singlePrice})</span>
-                            <button onclick="removeCartItem('${item.cartId}')" class="text-xs text-red-500 hover:text-red-700 hover:underline">
+                            <button onclick="removeCartItem('${item.cartId}')" class="text-xs text-tea-500 hover:text-tea-700 hover:underline">
                                 刪除
                             </button>
                         </div>
